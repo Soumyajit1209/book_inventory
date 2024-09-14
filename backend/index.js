@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const bookRoutes = require('./routes/bookRoutes');
+const Book = require('./models/Book');
 const app = express();
 const port = 3000;
 
@@ -10,8 +11,13 @@ app.use(cors());
 app.use(express.json());
 
 // Test endpoint
-app.get('/', (req, res) => {
-    res.send('Application is running...');
+app.get('/test', async (req, res) => {
+    try {
+      const books = await Book.find({});
+      res.json(books);
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
 });
 
 // MongoDB connection
