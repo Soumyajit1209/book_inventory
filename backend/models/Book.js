@@ -8,10 +8,11 @@ const bookSchema = new mongoose.Schema({
   rentalPrice: { type: Number, required: true },
   status: { type: String, enum: ['Yes', 'No'], required: true },
   author: { type: String, required: true },
-  publisher: { type: String, required: true }
+  publisher: { type: String, required: true },
+  isBestseller: { type: Boolean, default: false } 
 });
 
-// create book model
+// Create book model
 const Book = mongoose.model('Book', bookSchema);
 
 module.exports = Book;
